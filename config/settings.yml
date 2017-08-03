@@ -1,0 +1,7 @@
+plugins:
+  discourse_sync_to_nextcloud_enabled:
+    default: false
+  discourse_sync_to_nextcloud_quantity:
+    default: 5
+  discourse_sync_to_nextcloud_api_key:
+    default: ''
