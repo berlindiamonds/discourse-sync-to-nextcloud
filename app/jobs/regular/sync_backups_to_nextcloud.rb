@@ -4,8 +4,8 @@ module Jobs
     sidekiq_options queue: 'low'
 
     def execute(arg)
-      many_backups = Backup.all.take(SiteSetting.discourse_sync_to_nextcloud_quantity)
-      many_backups.each do |backup|
+      backups = Backup.all.take(SiteSetting.discourse_sync_to_nextcloud_quantity)
+      backups.each do |backup|
         DiscourseBackupToNextcloud::NextcloudSynchronizer.new(backup).sync
       end
     end
