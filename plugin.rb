@@ -5,10 +5,12 @@
 # url: https://github.com/berlindiamonds/discourse-sync-to-nextcloud
 
 # GEMS
+gem 'ocman', :git => 'git@github.com:tt-laboratories/ocman.git'
 
 enabled_site_setting :discourse_sync_to_nextcloud_enabled
 
 after_initialize do
+  load File.expand_path("../config/initializers/ocman.rb")
   load File.expand_path("../app/jobs/regular/sync_backups_to_nextcloud.rb", __FILE__)
   load File.expand_path("../lib/nextcloud_synchronizer.rb", __FILE__)
 
