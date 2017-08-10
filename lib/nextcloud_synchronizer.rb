@@ -37,7 +37,7 @@ module DiscourseBackupToNextcloud
     def remove_old_files(file, folder_name)
       next_files = Ocman.list('/#{folder_name}/#{files}')
       sorted = next_files.sort_by {|x| x.created_time}
-      keep = sorted.take(SiteSetting.discourse_sync_to_googledrive_quantity)
+      keep = sorted.take(SiteSetting.discourse_sync_to_nextcloud_quantity)
       trash = next_files - keep
       trash.each { |d| d.delete }
     end
