@@ -7,7 +7,6 @@ module DiscourseBackupToNextcloud
     end
 
     def ocman
-      ocman ||= Ocman.new
     end
 
     def can_sync?
@@ -18,28 +17,24 @@ module DiscourseBackupToNextcloud
 
     def perform_sync
       folder_name = Discourse.current_hostname
+      unless Ocman.list(folder_name).present?
+        folder = Ocman.create_folder(folder_name)
+      end
       full_path = backup.path
       filename = backup.filename
-      file = ocman.put('#{full_path}', '/#{filename}')
-      add_to_folder(file, folder_name)
+      file = Ocman.put(full_path, folder_name)
     end
 
-    def add_to_folder(file, folder_name)
-      folder = ocman.list('/#{folder_name}')
-      if folder.present?
-        ocman.move('source_path/of/file', 'destination_path')
-      else
-        folder = ocman.create_folder('/#{folder_name}')
-        ocman.move('source_path/of/file', 'destination_path')
-      end
-    end
 
     def remove_old_files(file, folder_name)
-      next_files = ocman.list('/#{folder_name}/#{files}')
+      next_files = Ocman.list(folder_name)
       sorted = next_files.sort_by {|x| x.created_time}
       keep = sorted.take(SiteSetting.discourse_sync_to_nextcloud_quantity)
       trash = next_files - keep
-      trash.each { |d| d.delete }
+      trash.each do |d|
+        path = "/#{folder_name}" + d[:path].split(folder_name)[1]
+        Ocman.delete(path)
+      end
     end
 
   end
