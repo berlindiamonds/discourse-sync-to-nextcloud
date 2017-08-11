@@ -13,7 +13,8 @@ module DiscourseBackupToNextcloud
       @turned_on && backup.present?
     end
 
-    def delete_old_files(folder_name)
+    def delete_old_files
+      folder_name = Discourse.current_hostname
       next_files = Ocman.list(folder_name)
       sorted = next_files.sort_by {|x| x.created_time}
       keep = sorted.take(SiteSetting.discourse_sync_to_nextcloud_quantity)
