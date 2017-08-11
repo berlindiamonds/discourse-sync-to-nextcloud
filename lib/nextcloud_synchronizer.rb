@@ -13,20 +13,7 @@ module DiscourseBackupToNextcloud
       @turned_on && backup.present?
     end
 
-    protected
-
-    def perform_sync
-      folder_name = Discourse.current_hostname
-      unless Ocman.list(folder_name).present?
-        folder = Ocman.create_folder(folder_name)
-      end
-      full_path = backup.path
-      filename = backup.filename
-      file = Ocman.put(full_path, folder_name)
-    end
-
-
-    def remove_old_files(file, folder_name)
+    def delete_old_files(file, folder_name)
       next_files = Ocman.list(folder_name)
       sorted = next_files.sort_by {|x| x.created_time}
       keep = sorted.take(SiteSetting.discourse_sync_to_nextcloud_quantity)
@@ -37,5 +24,18 @@ module DiscourseBackupToNextcloud
       end
     end
 
+    protected
+
+    def perform_sync
+      folder_name = Discourse.current_hostname
+      begin
+        Ocman.list(folder_name)
+      rescue
+        Ocman.create_folder(folder_name)
+      end
+      full_path = backup.path
+      filename = backup.filename
+      file = Ocman.put(full_path, folder_name)
+    end
   end
 end

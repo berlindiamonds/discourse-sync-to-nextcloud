@@ -8,6 +8,7 @@ module Jobs
       backups.each do |backup|
         DiscourseBackupToNextcloud::NextcloudSynchronizer.new(backup).sync
       end
+      DiscourseBackupToNextcloud::NextcloudSynchronizer.new(backups).delete_old_files
     end
   end
 end
