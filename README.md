@@ -12,6 +12,20 @@ A Plugin for Discourse that does a backup to your Nextcloud Account
 
 ![alt text](https://user-images.githubusercontent.com/15628617/28319119-44155a20-6bcd-11e7-9bfe-0e2154679ee6.png)
 
+6. Pick one provider on [Nextcloud](https://nextcloud.com/providers/) and Sign up for an account.
+
+7. In your `discourse-sync-to-nextcloud/config/initializers` folder create a new file called `ocman.rb` with the following code:
+```
+Ocman.configure do |config|
+  config.base_url = 'https://put your provider url here.org'
+  config.user_name = 'you username for the provider'
+  config.password = 'your password'
+end
+```
+and fill it out with your new credentials for the provider. Make sure you don't publish this file anywhere (eg. have it in the gitignore).
+
+8. In your Discourse settings click on *backup* and make sure you have enough storage space.
+
 This plugin was created by Jen and Kaja, in analogy to the [discourse-sync-to-dropbox plugin from Falco](https://github.com/xfalcox/discourse-backups-to-dropbox)
 
 For help please go to [Discourse Meta](https://meta.discourse.org/)
