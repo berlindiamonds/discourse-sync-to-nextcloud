@@ -6,11 +6,11 @@ A Plugin for Discourse that does a backup to your Nextcloud Account
 3. Clone this repository into your discourse/plugins folder
 4. In the browser go to your Admin Settings and then to Plugins. You should see the discourse-sync-to-nextcloud appearing there
 
-![alt text](https://user-images.githubusercontent.com/15628617/28319104-3839c696-6bcd-11e7-90dc-86513339190d.png)
+![alt text](https://user-images.githubusercontent.com/15628617/29270789-aa99ef82-80f8-11e7-86c9-6eda1998c19c.png)
 
-5. Click in Settings and enable the plugin
+5. Click in Settings and enable the plugin. Choose the quantity of backups you want to synchronize.
 
-![alt text](https://user-images.githubusercontent.com/15628617/28319119-44155a20-6bcd-11e7-9bfe-0e2154679ee6.png)
+![alt text](https://user-images.githubusercontent.com/15628617/29270795-b34d084e-80f8-11e7-8dd2-40a5ee90098a.png)
 
 6. Pick one provider on [Nextcloud](https://nextcloud.com/providers/) and Sign up for an account.
 
