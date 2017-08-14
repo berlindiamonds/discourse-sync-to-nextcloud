@@ -6,9 +6,6 @@ module DiscourseBackupToNextcloud
       @turned_on = SiteSetting.discourse_sync_to_nextcloud_enabled
     end
 
-    def ocman
-    end
-
     def can_sync?
       @turned_on && backup.present?
     end
@@ -43,9 +40,9 @@ module DiscourseBackupToNextcloud
 
     def file_already_there?(folder_name, filename)
       remote_files = Ocman.list(folder_name)
-      ary = []
-      remote_files.each {|p| ary << p[:path].split(folder_name)[1]}
-      ary.include?(filename)
+      file = []
+      remote_files.each {|pick| file << pick[:path].split(folder_name)[1]}
+      file.include?(filename)
     end
   end
 end
