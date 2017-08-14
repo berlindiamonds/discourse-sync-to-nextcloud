@@ -13,13 +13,14 @@ module DiscourseBackupToNextcloud
       @turned_on && backup.present?
     end
 
-    def delete_old_files(file, folder_name)
+    def delete_old_files
+      folder_name = Discourse.current_hostname
       next_files = Ocman.list(folder_name)
       sorted = next_files.sort_by {|x| x.created_time}
       keep = sorted.take(SiteSetting.discourse_sync_to_nextcloud_quantity)
       trash = next_files - keep
       trash.each do |d|
-        path = "/#{folder_name}" + d[:path].split(folder_name)[1]
+        path = "/#{folder_name}/" + d[:path].split(folder_name)[1]
         Ocman.delete(path)
       end
     end
@@ -35,7 +36,16 @@ module DiscourseBackupToNextcloud
       end
       full_path = backup.path
       filename = backup.filename
-      file = Ocman.put(full_path, folder_name)
+      unless file_already_there?(folder_name, filename)
+        Ocman.put(full_path, folder_name)
+      end
+    end
+
+    def file_already_there?(folder_name, filename)
+      remote_files = Ocman.list(folder_name)
+      ary = []
+      remote_files.each {|p| ary << p[:path].split(folder_name)[1]}
+      ary.include?(filename)
     end
   end
 end
