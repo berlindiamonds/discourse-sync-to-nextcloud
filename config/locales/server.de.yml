@@ -1,4 +1,4 @@
-en:
+de:
   site_settings:
     discourse_sync_to_nextcloud_enabled: "Backups zu Nextcloud aktivieren. Nach Aktivierung wird das erste Backup erstellt"
     discourse_sync_to_nextcloud_quantity: "Wie viele Backups in Nextcloud gespeichert werden"
