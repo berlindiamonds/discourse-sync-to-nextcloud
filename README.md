@@ -1,5 +1,5 @@
-# Discourse Sync to Nextcloud
-A Plugin for Discourse that does a backup to your Nextcloud Account
+# Discourse Sync to Nextcloud ☁️
+A Plugin for [Discourse](https://www.discourse.org) that does a backup to your [Nextcloud](https://nextcloud.com) account
 
 1. Make sure you have the latest version of Discourse set up properly
 2. Install the [basic-sync-plugin](https://github.com/berlindiamonds/discourse-sync-base) first
@@ -12,7 +12,7 @@ A Plugin for Discourse that does a backup to your Nextcloud Account
 
 ![alt text](https://user-images.githubusercontent.com/15628617/29270795-b34d084e-80f8-11e7-8dd2-40a5ee90098a.png)
 
-6. Pick one provider on [Nextcloud](https://nextcloud.com/providers/) and Sign up for an account.
+6. Pick a [Nextcloud provider](https://nextcloud.com/providers/) and sign up for an account. You can also [install your own Nextcloud server](https://nextcloud.com/install/#instructions-server).
 
 7. In your `discourse-sync-to-nextcloud/config/initializers` folder create a new file called `ocman.rb` with the following code:
 ```
