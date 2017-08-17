@@ -1,3 +1,4 @@
+require 'rails_helper'
 describe ::DiscourseBackupToNextcloud::NextcloudSynchronizer do
 
   let(:backup) { Backup.new('backup') }
@@ -12,28 +13,12 @@ describe ::DiscourseBackupToNextcloud::NextcloudSynchronizer do
   describe "#can_sync?" do
     it "should return false when disabled via site setting" do
       SiteSetting.discourse_sync_to_nextcloud_enabled = false
-      SiteSetting.discourse_sync_to_nextcloud_api_key = 'test_key'
-      ds = described_class.new(backup)
-      expect(ds.can_sync?).to eq(false)
-    end
-
-    it "should return false when the backup is missing" do
-      SiteSetting.discourse_sync_to_nextcloud_enabled = true
-      SiteSetting.discourse_sync_to_nextcloud_api_key = 'test_key'
-      ds = described_class.new(nil)
-      expect(ds.can_sync?).to eq(false)
-    end
-
-    it "should return false when the api key is missing" do
-      SiteSetting.discourse_sync_to_nextcloud_enabled = true
-      SiteSetting.discourse_sync_to_nextcloud_api_key = ''
       ds = described_class.new(backup)
       expect(ds.can_sync?).to eq(false)
     end
 
     it "should return true when everything is correct" do
       SiteSetting.discourse_sync_to_nextcloud_enabled = true
-      SiteSetting.discourse_sync_to_nextcloud_api_key = 'test_key'
       ds = described_class.new(backup)
       expect(ds.can_sync?).to eq(true)
     end
