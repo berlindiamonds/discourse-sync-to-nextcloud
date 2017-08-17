@@ -14,11 +14,11 @@ module DiscourseBackupToNextcloud
       folder_name = Discourse.current_hostname
       next_files = Ocman.list(folder_name)
       sorted = next_files.sort_by {|x| x.created_time}
-      keep = sorted.take(SiteSetting.discourse_sync_to_nextcloud_quantity)
+      keep = next_files.take(SiteSetting.discourse_sync_to_nextcloud_quantity)
       trash = next_files - keep
-      trash.each do |d|
-        path = "/#{folder_name}/" + d[:path].split(folder_name)[1]
-        Ocman.delete(path)
+      trash.each do |f|
+        old_files = "/#{folder_name}/#{f.path}"
+        Ocman.delete(old_files)
       end
     end
 

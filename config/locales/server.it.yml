@@ -1,0 +1,5 @@
+it:
+  site_settings:
+    discourse_sync_to_nextcloud_enabled: "Abilitare il plugin Nextcloud backup. Dopo che lo avrai abilitato, funzionerà dal prossimo backup"
+    discourse_sync_to_nextcloud_quantity: "Quanti backup verranno conservati su Nextcloud"
+    discourse_sync_to_nextcloud_api_key: "Il tuo Nextcloud Generated Access Token"
