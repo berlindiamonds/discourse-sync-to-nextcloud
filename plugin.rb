@@ -5,8 +5,8 @@
 # url: https://github.com/berlindiamonds/discourse-sync-to-nextcloud
 
 # GEMS
-gem 'domain_name', '0.5.20170404', { require: false }
-gem 'http-cookie', '1.0.3', { require: false }
+# gem 'domain_name', '0.5.20170404', { require: false }
+# gem 'http-cookie', '1.0.3', { require: false }
 gem 'hashie', '3.5.5', { require: false }
 gem 'multi_json', '1.12.1', { require: false }
 gem 'net_dav', '0.5.1', { require: false }
