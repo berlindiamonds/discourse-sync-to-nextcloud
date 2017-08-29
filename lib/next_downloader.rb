@@ -37,9 +37,10 @@ module DiscourseDownloadFromNextcloud
 
     def create_url
       folder_name = Discourse.current_hostname
-      found = next_files.select { |f| f[:path] == file_path }
-      file_title = found.first.title
-      file_url = Ocman.list(folder_name).share
+      username = Ocman.configure { |o| o.user_name }
+      found = next_files.select { |f| f[:path] == file_path }.pop
+      # file_title = found.first.title
+      file_url = Ocman.share_info(found[:path], username)
     end
   end
 end
