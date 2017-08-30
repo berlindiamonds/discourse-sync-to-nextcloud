@@ -15,7 +15,10 @@ gem 'rest-client', '2.0.2', { require: false }
 gem 'ocman', '1.2.2'
 require 'sidekiq'
 
+
 enabled_site_setting :discourse_sync_to_nextcloud_enabled
+
+add_admin_route 'nextfiles.title', 'nextfiles'
 
 after_initialize do
   load File.expand_path("../config/initializers/ocman.rb", __FILE__)
@@ -30,6 +33,7 @@ after_initialize do
   end
 
   Discourse::Application.routes.append do
+    get "/admin/plugins/nextfiles" => "admin/plugins/#index", constraints: StaffConstraint.new
     get "/admin/plugins/discourse-sync-to-nextcloud/downloader" => "downloaders#show"
     post "/admin/plugins/discourse-sync-to-nextcloud/downloader", to: "downloaders#create", as: "download_next"
   end

@@ -40,7 +40,7 @@ module DiscourseDownloadFromNextcloud
       username = Ocman.configure { |o| o.user_name }
       found = next_files.select { |f| f[:path] == file_path }.pop
       # file_title = found.first.title
-      file_url = Ocman.share_info(found[:path], username)
+      file_url = Ocman.share(found[:path], username)
     end
   end
 end
