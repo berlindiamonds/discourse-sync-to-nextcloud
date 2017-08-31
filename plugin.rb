@@ -15,6 +15,11 @@ gem 'rest-client', '2.0.2', { require: false }
 gem 'ocman', '1.2.2'
 require 'sidekiq'
 
+add_admin_route 'nextfiles.title', 'nextfiles'
+Discourse::Application.routes.append do
+  get '/admin/plugins/nextfiles' => 'admin/plugins#index'
+end
+
 enabled_site_setting :discourse_sync_to_nextcloud_enabled
 
 after_initialize do
