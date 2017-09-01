@@ -14,11 +14,11 @@ class DownloadersController < ApplicationController
   end
 
   def create
-    @file_id = "0B7WjYjWZJv_4blA0a2p6RzVraFE"
-    Jobs.enqueue(:send_download_next_link, file_id: @file_id)
-    # respond_to do |format|
-    #   format.json {render json: @file_id}
-    #   format.html {render html: @file_id}
-    # end
+    @file_path = "https:cloud.indie.hostremote.phpwebdavlocalhostdiscourse-2017-08-11-142637-v20170731030330.sql.gz"
+    Jobs.enqueue(:send_download_next_link, file_path: @file_path)
+    respond_to do |format|
+      format.json {render json: @file_path}
+      format.html {render html: @file_path}
+    end
   end
 end

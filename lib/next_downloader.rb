@@ -26,6 +26,8 @@ module DiscourseDownloadFromNextcloud
       {"files" => list_files}.to_json
     end
 
+    # "{\"files\":[{\"title\":\"discourse-2017-08-11-142637-v20170731030330.sql.gz\",\"file_path\":\"https:cloud.indie.hostremote.phpwebdavlocalhostdiscourse-2017-08-11-142637-v20170731030330.sql.gz\",\"size\":8009104,\"created_at\":[\"\",\"2017\",\"08\",\"11\"]}]}"
+
     def pick_file(file_path)
       @file_path = "https:cloud.indie.hostremote.phpwebdavlocalhostdiscourse-2017-08-11-142637-v20170731030330.sql.gz"
       # click on a file from JsonFile sends a POST :file_path to create

@@ -4,9 +4,9 @@ module Jobs
     sidekiq_options queue: 'low'
 
     def execute(args)
-      id = @file_id
+      path = @file_path
       to_address = args[:to_address]
-      download = DiscourseDownloadFromNextcloud::NextDownloader.new(id)
+      download = DiscourseDownloadFromNextcloud::NextDownloader.new(path)
       file_url = download.create_url
 
       raise Discourse::InvalidParameters.new(:to_address) if to_address.blank?
