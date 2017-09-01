@@ -32,7 +32,7 @@ after_initialize do
 
   Discourse::Application.routes.append do
     get "/admin/plugins/nextfiles" => "admin/plugins/#index", constraints: StaffConstraint.new
-    get "/admin/plugins/discourse-sync-to-nextcloud/downloader" => "downloaders#show"
+    get "/admin/plugins/discourse-sync-to-nextcloud/downloader" => "downloaders#index"
     post "/admin/plugins/discourse-sync-to-nextcloud/downloader", to: "downloaders#create", as: "download_next"
   end
 end
