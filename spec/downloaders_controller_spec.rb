@@ -4,7 +4,7 @@ RSpec.configure do |config|
   config.before(:each) do
     stub_request(:propfind, "https://cloud.indie.host/remote.php/webdav/test.localhost").
       with(body: "<?xml version=\"1.0\" encoding=\"utf-8\"?><DAV:propfind xmlns:DAV=\"DAV:\"><DAV:allprop/></DAV:propfind>",
-        headers: {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Content-Type'=>'text/xml; charset="utf-8"', 'Depth'=>'1', 'User-Agent'=>'Ruby'}).
+           headers: { 'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Content-Type'=>'text/xml; charset="utf-8"', 'Depth'=>'1', 'User-Agent'=>'Ruby' }).
       to_return(status: 200, body: "", headers: {})
   end
 end

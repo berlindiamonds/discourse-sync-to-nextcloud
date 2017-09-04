@@ -15,7 +15,6 @@ gem 'rest-client', '2.0.2', { require: false }
 gem 'ocman', '1.2.2'
 require 'sidekiq'
 
-
 enabled_site_setting :discourse_sync_to_nextcloud_enabled
 
 after_initialize do
@@ -26,7 +25,7 @@ after_initialize do
   load File.expand_path("../lib/next_downloader.rb", __FILE__)
   load File.expand_path("../app/controllers/downloaders_controller.rb", __FILE__)
 
-  DiscourseEvent.on(:backup_created)do
+  DiscourseEvent.on(:backup_created) do
     Jobs.enqueue(:sync_backups_to_nextcloud)
   end
 

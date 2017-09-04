@@ -21,9 +21,9 @@ module DiscourseDownloadFromNextcloud
     def json_list
       folder_name = Discourse.current_hostname
       list_files = next_files.map do |o|
-        {title: o[:path].split(folder_name)[1], file_path: o[:path], size: o[:size], created_at: o[:path].split("discourse")[1].split("-")[0..3]}
+        { title: o[:path].split(folder_name)[1], file_path: o[:path], size: o[:size], created_at: o[:path].split("discourse")[1].split("-")[0..3] }
       end
-      {"files" => list_files}.to_json
+      { "files" => list_files }.to_json
     end
 
     # "{\"files\":[{\"title\":\"discourse-2017-08-11-142637-v20170731030330.sql.gz\",\"file_path\":\"https:cloud.indie.hostremote.phpwebdavlocalhostdiscourse-2017-08-11-142637-v20170731030330.sql.gz\",\"size\":8009104,\"created_at\":[\"\",\"2017\",\"08\",\"11\"]}]}"

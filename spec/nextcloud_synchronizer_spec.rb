@@ -1,4 +1,5 @@
 require 'rails_helper'
+
 describe ::DiscourseBackupToNextcloud::NextcloudSynchronizer do
 
   let(:backup) { Backup.new('backup') }

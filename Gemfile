@@ -9,3 +9,5 @@ gem 'net_dav', '0.5.1', { require: false }
 gem 'netrc', '0.8.0', { require: false }
 gem 'rest-client', '2.0.2', { require: false }
 gem 'ocman', '1.2.2'
+
+gem 'rubocop', '~> 0.49.1', { require: false }
