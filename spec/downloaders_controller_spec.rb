@@ -9,68 +9,74 @@ RSpec.configure do |config|
   end
 end
 
-describe ApplicationController::DownloadersController, type: :controller do
+describe Admin::AdminController::NextDownloadersController, type: :controller do
 
-  it "is a subclass of ApplicationController" do
-    expect(DownloadersController < ApplicationController).to eq(true)
-  end
+  context "while logged in as an admin" do
 
-  describe "GET #index" do
-    let(:sample_json) {
-      "{\"files\":[
-          {
-          \"title\":\"discourse-2017-08-11-142637-v20170731030330.sql.gz\",
-          \"file_path\":\"https:cloud.indie.hostremote.phpwebdavlocalhostdiscourse-2017-08-11-142637-v20170731030330.sql.gz\",
-          \"size\":8009104,
-          \"created_at\":[
-            \"\",
-            \"2017\",
-            \"08\",
-            \"11\"]
-            }
-          ]
-      }"
-    }
+    before { @admin = log_in(:admin) }
 
-    before {
-      next_instance = DiscourseDownloadFromNextcloud::NextDownloader
-      next_instance.any_instance.stubs(:json_list).returns(sample_json)
-    }
-
-    it "returns a json list of all nextcloud files" do
-      xhr :get, :index, format: :json
-      expect(response.body).to eq(sample_json)
+    it "is a subclass of Admin::AdminController" do
+      expect(NextDownloadersController < Admin::AdminController).to eq(true)
     end
 
-    it "responds with 200 status" do
-      xhr :get, :index
-      expect(response).to be_success
-      expect(response).to have_http_status(200)
+    describe "GET #index" do
+      let(:sample_json) {
+        "{\"files\":[
+            {
+            \"title\":\"discourse-2017-08-11-142637-v20170731030330.sql.gz\",
+            \"file_path\":\"https:cloud.indie.hostremote.phpwebdavlocalhostdiscourse-2017-08-11-142637-v20170731030330.sql.gz\",
+            \"size\":8009104,
+            \"created_at\":[
+              \"\",
+              \"2017\",
+              \"08\",
+              \"11\"]
+              }
+            ]
+        }"
+      }
+
+      before {
+        next_instance = DiscourseDownloadFromNextcloud::NextDownloader
+        next_instance.any_instance.stubs(:json_list).returns(sample_json)
+      }
+
+      it "returns a json list of all nextcloud files" do
+        xhr :get, :index, format: :json
+        expect(response.body).to eq(sample_json)
+      end
+
+      it "responds with 200 status" do
+        xhr :get, :index
+        expect(response).to be_success
+        expect(response).to have_http_status(200)
+      end
+
     end
-  end
 
-  describe "POST #create" do
-    let(:sample_file_path) {
-      "https:cloud.indie.hostremote.phpwebdavlocalhostdiscourse-2017-08-11-142637-v20170731030330.sql.gz"
-    }
+    describe "POST #create" do
+      let(:sample_file_path) {
+        "https:cloud.indie.hostremote.phpwebdavlocalhostdiscourse-2017-08-11-142637-v20170731030330.sql.gz"
+      }
 
 
-    before {
-      next_instance = DiscourseDownloadFromNextcloud::NextDownloader
-      next_instance.any_instance.stubs(:file_path).returns(sample_file_path)
-    }
+      before {
+        next_instance = DiscourseDownloadFromNextcloud::NextDownloader
+        next_instance.any_instance.stubs(:file_path).returns(sample_file_path)
+      }
 
-    it "sends a google-file-path to the job" do
-      xhr :post, :create
-      @file_path = :sample_file_path
-      expect(@file_path).to eq(:sample_file_path)
+      it "sends a google-file-path to the job" do
+        xhr :post, :create
+        @file_path = :sample_file_path
+        expect(@file_path).to eq(:sample_file_path)
+      end
+
+      it "responds with 200 status" do
+        xhr :post, :create
+        expect(response).to be_success
+        expect(response).to have_http_status(200)
+      end
+
     end
-
-    it "responds with 200 status" do
-      xhr :post, :create
-      expect(response).to be_success
-      expect(response).to have_http_status(200)
-    end
-
   end
 end
