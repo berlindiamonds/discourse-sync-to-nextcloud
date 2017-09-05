@@ -77,6 +77,28 @@ describe Admin::AdminController::NextDownloadersController, type: :controller do
         expect(response).to have_http_status(200)
       end
 
+      # it "raises an error when the post parameter is missing" do
+      #   xhr :post, :create
+      #   @file_path = nil
+      #   puts response.body
+      #   expect {
+      #     xhr :post, :create
+      #   }.to raise_error(ActionController::ParameterMissing)
+      # end
+
+      # it "enqueues email job" do
+      #   xhr :post, :create
+      #   Jobs.expects(:enqueue).with(:send_download_next_link, has_entries(file_path: sample_file_path))
+      #   expect(response).to be_success
+      # end
+
+      # it "returns 404 when the backup does not exist" do
+      #   xhr :post, :sample_file_path
+      #   expect(response).to be_not_found
+      # end
+
     end
+
+
   end
 end
