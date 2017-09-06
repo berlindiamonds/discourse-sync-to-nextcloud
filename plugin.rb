@@ -30,7 +30,7 @@ after_initialize do
   end
 
   Discourse::Application.routes.append do
-    get "/admin/plugins/discourse-sync-to-nextcloud/downloader" => "next_downloaders#index"
-    post "/admin/plugins/discourse-sync-to-nextcloud/downloader", to: "next_downloaders#create", as: "download_next"
+    get "/admin/plugins/discourse-sync-to-nextcloud/nextdownloader" => "next_downloaders#index"
+    post "/admin/plugins/discourse-sync-to-nextcloud/nextdownloader", to: "next_downloaders#create", as: "download_next_file"
   end
 end
