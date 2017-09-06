@@ -13,7 +13,11 @@ describe Admin::AdminController::NextDownloadersController, type: :controller do
 
   context "while logged in as an admin" do
 
-    before { @admin = log_in(:admin) }
+    # before { @admin = log_in(:admin) }
+    before do
+      @admin = log_in(:admin)
+      SiteSetting.discourse_sync_to_nextcloud_enabled = true
+    end
 
     it "is a subclass of Admin::AdminController" do
       expect(NextDownloadersController < Admin::AdminController).to eq(true)
