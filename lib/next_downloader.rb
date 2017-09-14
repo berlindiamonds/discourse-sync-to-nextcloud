@@ -4,7 +4,7 @@ module DiscourseDownloadFromNextcloud
     attr_accessor :next_files, :file_path
 
     def initialize(file_path)
-      @file_path = pick_file(file_path)
+      @file_path = file_path
       @api_key = SiteSetting.discourse_sync_to_googledrive_api_key
       @turned_on = SiteSetting.discourse_sync_to_googledrive_enabled
     end
@@ -26,23 +26,14 @@ module DiscourseDownloadFromNextcloud
       { "files" => list_files }.to_json
     end
 
-    # "{\"files\":[{\"title\":\"discourse-2017-08-11-142637-v20170731030330.sql.gz\",\"file_path\":\"https:cloud.indie.hostremote.phpwebdavlocalhostdiscourse-2017-08-11-142637-v20170731030330.sql.gz\",\"size\":8009104,\"created_at\":[\"\",\"2017\",\"08\",\"11\"]}]}"
-
-    def pick_file(file_path)
-      @file_path = "https:cloud.indie.hostremote.phpwebdavlocalhostdiscourse-2017-08-11-142637-v20170731030330.sql.gz"
-      # click on a file from JsonFile sends a POST :file_path to create
-      # something like a <%= select_tag(:file_path) %>
-      # pick by file_path from the view
-      # next_files.file_path(picked)
-      # returns file_path
-    end
-
     def create_url
       folder_name = Discourse.current_hostname
       username = Ocman.configure { |o| o.user_name }
       found = next_files.select { |f| f[:path] == file_path }.pop
-      # file_title = found.first.title
       file_url = Ocman.share(found[:path], username)
     end
   end
 end
+
+# "https:cloud.indie.hostremote.phpwebdavlocalhostdiscourse-2017-08-11-142637-v20170731030330.sql.gz"
+# "{\"files\":[{\"title\":\"discourse-2017-08-11-142637-v20170731030330.sql.gz\",\"file_path\":\"https:cloud.indie.hostremote.phpwebdavlocalhostdiscourse-2017-08-11-142637-v20170731030330.sql.gz\",\"size\":8009104,\"created_at\":[\"\",\"2017\",\"08\",\"11\"]}]}"
