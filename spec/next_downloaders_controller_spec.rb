@@ -90,11 +90,11 @@ describe Admin::AdminController::NextDownloadersController, type: :controller do
       #   }.to raise_error(ActionController::ParameterMissing)
       # end
 
-      # it "enqueues email job" do
-      #   xhr :post, :create
-      #   Jobs.expects(:enqueue).with(:send_download_next_link, has_entries(file_path: sample_file_path))
-      #   expect(response).to be_success
-      # end
+      it "enqueues email job" do
+        xhr :post, :create
+        Jobs.expects(:enqueue).with(:send_download_next_link, has_entries(file_path: :sample_file_path))
+        expect(response).to be_success
+      end
 
       # it "returns 404 when the backup does not exist" do
       #   xhr :post, :sample_file_path
