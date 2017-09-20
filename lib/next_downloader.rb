@@ -1,16 +1,15 @@
 module DiscourseDownloadFromNextcloud
   class NextDownloader
 
-    attr_accessor :next_files, :file_path
+    attr_accessor :next_files, :file_id
 
-    def initialize(file_path)
-      @file_path = file_path
-      @api_key = SiteSetting.discourse_sync_to_googledrive_api_key
-      @turned_on = SiteSetting.discourse_sync_to_googledrive_enabled
+    def initialize(file_id)
+      @file_id = file_id
+      @turned_on = SiteSetting.discourse_sync_to_nextcloud_enabled
     end
 
     def can_download?
-      @turned_on && @file_path.present?
+      @turned_on && @file_id.present?
     end
 
     def next_files
@@ -29,11 +28,8 @@ module DiscourseDownloadFromNextcloud
     def create_url
       folder_name = Discourse.current_hostname
       username = Ocman.configure { |o| o.user_name }
-      found = next_files.select { |f| f[:path] == file_path }.pop
+      found = next_files.select { |f| f[:path] == file_id }.pop
       file_url = Ocman.share(found[:path], username)
     end
   end
 end
-
-# "https:cloud.indie.hostremote.phpwebdavlocalhostdiscourse-2017-08-11-142637-v20170731030330.sql.gz"
-# "{\"files\":[{\"title\":\"discourse-2017-08-11-142637-v20170731030330.sql.gz\",\"file_path\":\"https:cloud.indie.hostremote.phpwebdavlocalhostdiscourse-2017-08-11-142637-v20170731030330.sql.gz\",\"size\":8009104,\"created_at\":[\"\",\"2017\",\"08\",\"11\"]}]}"

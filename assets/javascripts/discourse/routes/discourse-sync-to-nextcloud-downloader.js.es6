@@ -3,6 +3,6 @@ import PreloadStore from 'preload-store';
 
 export default Ember.Route.extend({
   model() {
-    return ajax("/admin/plugins/discourse-sync-to-nextcloud/nextdownloader.json");
+    return ajax("/admin/plugins/discourse-sync-to-nextcloud/downloader.json");
   }
 });

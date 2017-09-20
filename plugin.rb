@@ -23,15 +23,15 @@ after_initialize do
   load File.expand_path("../app/jobs/regular/send_download_next_link.rb", __FILE__)
   load File.expand_path("../lib/nextcloud_synchronizer.rb", __FILE__)
   load File.expand_path("../lib/next_downloader.rb", __FILE__)
-  load File.expand_path("../app/controllers/next_downloaders_controller.rb", __FILE__)
+  load File.expand_path("../app/controllers/downloaders_controller.rb", __FILE__)
 
   DiscourseEvent.on(:backup_created) do
     Jobs.enqueue(:sync_backups_to_nextcloud)
   end
 
   Discourse::Application.routes.append do
-    get "/admin/plugins/discourse-sync-to-nextcloud/nextdownloader" => "next_downloaders#index"
-    # post "/admin/plugins/discourse-sync-to-nextcloud/nextdownloader", to: "next_downloaders#create", as: "download_next_file"
-    put "/admin/plugins/discourse-sync-to-googledrive/nextdownloader/:file_path" => "downloaders#create"
+    get "/admin/plugins/discourse-sync-to-nextcloud/downloader" => "downloaders#index"
+    put "/admin/plugins/discourse-sync-to-nextcloud/downloader/:file_id" => "downloaders#create"
+    get "/admin/plugins/discourse-sync-to-nextcloud/downloader/:file_id" => "downloaders#show"
   end
 end
