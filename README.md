@@ -20,6 +20,8 @@ Ocman.configure do |config|
   config.base_url = 'https://put your provider url here.org'
   config.user_name = 'you username for the provider'
   config.password = 'your password'
+## Optional: (When nextcloud wasn't installed on website root.)
+#  config.dav_base_uri = '/path/to/nextcloud-root/remote.php/webdav/'
 end
 ```
 and fill it out with your new credentials for the provider. Make sure you don't publish this file anywhere (eg. have it in the gitignore).
